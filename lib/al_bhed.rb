@@ -9,6 +9,16 @@ module AlBhed
   DOWNCASED_ALBHEDS = %w( y p l t a v k r e z g m s h u b x n c d i j f q o w )
 
   class ::String
+
+    # Translate into Al Bhed
+    #
+    # Example:
+    #   >> "Hi!".to_albhed
+    #   => "Re!"
+    #
+    # Arguments:
+    #   nothing
+
     def to_albhed
       self.chars.inject("") do |results, c|
         if idx = DOWNCASES.index(c)
