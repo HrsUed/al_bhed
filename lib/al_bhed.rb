@@ -18,13 +18,32 @@ module AlBhed
     #
     # Arguments:
     #   nothing
-
     def to_albhed
       self.chars.inject("") do |results, c|
         if idx = DOWNCASES.index(c)
           results << DOWNCASED_ALBHEDS[idx]
         elsif idx = UPCASES.index(c)
           results << UPCASED_ALBHEDS[idx]
+        else
+          results << c
+        end
+      end
+    end
+
+    # Translate Al Bhed into English
+    #
+    # Example:
+    #   >> "Re!".from_albhed
+    #   => "Hi!"
+    #
+    # Arguments:
+    #   nothing
+    def from_albhed
+      self.chars.inject("") do |results, c|
+        if idx = DOWNCASED_ALBHEDS.index(c)
+          results << DOWNCASES[idx]
+        elsif idx = UPCASED_ALBHEDS.index(c)
+          results << UPCASES[idx]
         else
           results << c
         end
