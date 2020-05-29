@@ -19,8 +19,20 @@ Or install it yourself as:
     $ gem install al_bhed
 
 ## Usage
+### If you translate English into Al Bhed...
 
-TODO: Write usage instructions here
+```ruby
+"Hi, would you like to contribute to this gem?".to_albhed
+# => "Re, fuimt oui mega du luhdnepida du drec kas?"
+```
+
+### If you translate Al Bhed into English...
+
+Sorry, it isn't implemented yet.
+
+### If you use Japanese...
+
+Sorry, it isn't implemented yet.
 
 ## Development
 
