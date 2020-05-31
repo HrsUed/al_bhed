@@ -16,7 +16,6 @@ module AlBhed
   DAKUON_ALBHEDS    = %w( ダ ジ ヅ デ ゾ バ ギ ブ ゲ ボ ガ ビ グ ベ ゴ ザ ヂ ズ ゼ ド プ ペ パ ポ ピ )
 
   class ::String
-
     # Translate into Al Bhed
     #
     # Example:
@@ -42,13 +41,13 @@ module AlBhed
     #   => "Hi!"
     #
     # Arguments:
-    #   nothing
-    def from_albhed
+    #   hira: (Boolean)
+    def from_albhed(hira: false)
       self.chars.inject("") do |results, c|
         if latin?(c)
           results << from_albhed_to_english(c)
         else
-          results << from_albhed_to_japanese(c)
+          results << from_albhed_to_japanese(c, hira: hira)
         end
       end
     end
@@ -89,8 +88,14 @@ module AlBhed
       end
     end
 
-    def from_albhed_to_japanese(c)
-      c
+    def from_albhed_to_japanese(c, hira: false)
+      if idx = KANA_ALBHEDS.index(c)
+        hira ? HIRA_KANA[idx] : KATA_KANA[idx]
+      elsif idx = DAKUON_ALBHEDS.index(c)
+        hira ? HIRA_DAKUON[idx] : KATA_DAKUON[idx]
+      else
+        c
+      end
     end
   end
 end
