@@ -20,12 +20,10 @@ module AlBhed
     #   nothing
     def to_albhed
       self.chars.inject("") do |results, c|
-        if idx = DOWNCASES.index(c)
-          results << DOWNCASED_ALBHEDS[idx]
-        elsif idx = UPCASES.index(c)
-          results << UPCASED_ALBHEDS[idx]
+        if latin?(c)
+          results << from_english_to_albhed(c)
         else
-          results << c
+          results << from_japanese_to_albhed(c)
         end
       end
     end
@@ -40,14 +38,46 @@ module AlBhed
     #   nothing
     def from_albhed
       self.chars.inject("") do |results, c|
-        if idx = DOWNCASED_ALBHEDS.index(c)
-          results << DOWNCASES[idx]
-        elsif idx = UPCASED_ALBHEDS.index(c)
-          results << UPCASES[idx]
+        if latin?(c)
+          results << from_albhed_to_english(c)
         else
-          results << c
+          results << from_albhed_to_japanese(c)
         end
       end
+    end
+
+    private
+
+    def latin?(c)
+      ("a" .. "z").include?(c) || ("A" .. "Z").include?(c)
+    end
+
+    def from_english_to_albhed(c)
+      if idx = DOWNCASES.index(c)
+        DOWNCASED_ALBHEDS[idx]
+      elsif idx = UPCASES.index(c)
+        UPCASED_ALBHEDS[idx]
+      else
+        c
+      end
+    end
+
+    def from_albhed_to_english(c)
+      if idx = DOWNCASED_ALBHEDS.index(c)
+        DOWNCASES[idx]
+      elsif idx = UPCASED_ALBHEDS.index(c)
+        UPCASES[idx]
+      else
+        c
+      end
+    end
+
+    def from_japanese_to_albhed(c)
+      c
+    end
+
+    def from_albhed_to_japanese(c)
+      c
     end
   end
 end
