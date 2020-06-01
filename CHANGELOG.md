@@ -1,5 +1,7 @@
 # v0.1.2
 - add `String#from_albhed` method
+- enabled to translate Japanese
+- add README in Al Bhed
 
 # v0.1.1
 Edit CHANGELOG.md
