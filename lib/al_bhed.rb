@@ -25,7 +25,7 @@ module AlBhed
     # Arguments:
     #   nothing
     def to_albhed
-      self.chars.inject("") do |results, c|
+      chars.inject("") do |results, c|
         if latin?(c)
           results << from_english_to_albhed(c)
         else
@@ -43,7 +43,7 @@ module AlBhed
     # Arguments:
     #   hira: (Boolean)
     def from_albhed(hira: false)
-      self.chars.inject("") do |results, c|
+      chars.inject("") do |results, c|
         if latin?(c)
           results << from_albhed_to_english(c)
         else
