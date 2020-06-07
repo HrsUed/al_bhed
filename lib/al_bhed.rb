@@ -54,47 +54,47 @@ module AlBhed
 
     private
 
-    def latin?(c)
-      ("a".."z").include?(c) || ("A".."Z").include?(c)
+    def latin?(char)
+      ("a".."z").include?(char) || ("A".."Z").include?(char)
     end
 
-    def from_english_to_albhed(c)
-      if (idx = DOWNCASES.index(c))
+    def from_english_to_albhed(char)
+      if (idx = DOWNCASES.index(char))
         DOWNCASED_ALBHEDS[idx]
-      elsif (idx = UPCASES.index(c))
+      elsif (idx = UPCASES.index(char))
         UPCASED_ALBHEDS[idx]
       else
-        c
+        char
       end
     end
 
-    def from_albhed_to_english(c)
-      if (idx = DOWNCASED_ALBHEDS.index(c))
+    def from_albhed_to_english(char)
+      if (idx = DOWNCASED_ALBHEDS.index(char))
         DOWNCASES[idx]
-      elsif (idx = UPCASED_ALBHEDS.index(c))
+      elsif (idx = UPCASED_ALBHEDS.index(char))
         UPCASES[idx]
       else
-        c
+        char
       end
     end
 
-    def from_japanese_to_albhed(c)
-      if (idx = HIRA_KANA.index(c) || KATA_KANA.index(c))
+    def from_japanese_to_albhed(char)
+      if (idx = HIRA_KANA.index(char) || KATA_KANA.index(char))
         KANA_ALBHEDS[idx]
-      elsif (idx = HIRA_DAKUON.index(c) || KATA_DAKUON.index(c))
+      elsif (idx = HIRA_DAKUON.index(char) || KATA_DAKUON.index(char))
         DAKUON_ALBHEDS[idx]
       else
-        c
+        char
       end
     end
 
-    def from_albhed_to_japanese(c, hira: false)
-      if (idx = KANA_ALBHEDS.index(c))
+    def from_albhed_to_japanese(char, hira: false)
+      if (idx = KANA_ALBHEDS.index(char))
         hira ? HIRA_KANA[idx] : KATA_KANA[idx]
-      elsif (idx = DAKUON_ALBHEDS.index(c))
+      elsif (idx = DAKUON_ALBHEDS.index(char))
         hira ? HIRA_DAKUON[idx] : KATA_DAKUON[idx]
       else
-        c
+        char
       end
     end
   end
