@@ -55,7 +55,7 @@ module AlBhed
     private
 
     def latin?(c)
-      ("a" .. "z").include?(c) || ("A" .. "Z").include?(c)
+      ("a".."z").include?(c) || ("A".."Z").include?(c)
     end
 
     def from_english_to_albhed(c)
