@@ -59,9 +59,9 @@ module AlBhed
     end
 
     def from_english_to_albhed(c)
-      if idx = DOWNCASES.index(c)
+      if (idx = DOWNCASES.index(c))
         DOWNCASED_ALBHEDS[idx]
-      elsif idx = UPCASES.index(c)
+      elsif (idx = UPCASES.index(c))
         UPCASED_ALBHEDS[idx]
       else
         c
@@ -69,9 +69,9 @@ module AlBhed
     end
 
     def from_albhed_to_english(c)
-      if idx = DOWNCASED_ALBHEDS.index(c)
+      if (idx = DOWNCASED_ALBHEDS.index(c))
         DOWNCASES[idx]
-      elsif idx = UPCASED_ALBHEDS.index(c)
+      elsif (idx = UPCASED_ALBHEDS.index(c))
         UPCASES[idx]
       else
         c
@@ -79,9 +79,9 @@ module AlBhed
     end
 
     def from_japanese_to_albhed(c)
-      if idx = HIRA_KANA.index(c) || KATA_KANA.index(c)
+      if (idx = HIRA_KANA.index(c) || KATA_KANA.index(c))
         KANA_ALBHEDS[idx]
-      elsif idx = HIRA_DAKUON.index(c) || KATA_DAKUON.index(c)
+      elsif (idx = HIRA_DAKUON.index(c) || KATA_DAKUON.index(c))
         DAKUON_ALBHEDS[idx]
       else
         c
@@ -89,9 +89,9 @@ module AlBhed
     end
 
     def from_albhed_to_japanese(c, hira: false)
-      if idx = KANA_ALBHEDS.index(c)
+      if (idx = KANA_ALBHEDS.index(c))
         hira ? HIRA_KANA[idx] : KATA_KANA[idx]
-      elsif idx = DAKUON_ALBHEDS.index(c)
+      elsif (idx = DAKUON_ALBHEDS.index(c))
         hira ? HIRA_DAKUON[idx] : KATA_DAKUON[idx]
       else
         c
