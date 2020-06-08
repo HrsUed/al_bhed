@@ -2,6 +2,7 @@
 
 require "al_bhed/version"
 
+# This is a namespace so as to open up for a built-in String class
 module AlBhed
   class Error < StandardError; end
 
@@ -17,6 +18,7 @@ module AlBhed
   KANA_ALBHEDS      = %w[ワ ミ フ ネ ト ア チ ル テ ヨ ラ キ ヌ ヘ ホ サ ヒ ユ セ ソ ハ シ ス メ オ マ リ ク ケ ロ ヤ イ ツ レ コ タ ヲ モ ナ ニ ウ エ ノ カ ム ン].freeze
   DAKUON_ALBHEDS    = %w[ダ ジ ヅ デ ゾ バ ギ ブ ゲ ボ ガ ビ グ ベ ゴ ザ ヂ ズ ゼ ド プ ペ パ ポ ピ].freeze
 
+  # a built-in String class
   class ::String
     # Translate into Al Bhed
     #
