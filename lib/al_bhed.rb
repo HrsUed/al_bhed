@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "al_bhed/version"
 
 module AlBhed
