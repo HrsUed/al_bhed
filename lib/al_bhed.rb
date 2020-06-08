@@ -3,17 +3,17 @@ require "al_bhed/version"
 module AlBhed
   class Error < StandardError; end
 
-  UPCASES           = %w( A B C D E F G H I J K L M N O P Q R S T U V W X Y Z )
-  UPCASED_ALBHEDS   = %w( Y P L T A V K R E Z G M S H U B X N C D I J F Q O W )
-  DOWNCASES         = %w( a b c d e f g h i j k l m n o p q r s t u v w x y z )
-  DOWNCASED_ALBHEDS = %w( y p l t a v k r e z g m s h u b x n c d i j f q o w )
+  UPCASES           = %w(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
+  UPCASED_ALBHEDS   = %w(Y P L T A V K R E Z G M S H U B X N C D I J F Q O W)
+  DOWNCASES         = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
+  DOWNCASED_ALBHEDS = %w(y p l t a v k r e z g m s h u b x n c d i j f q o w)
 
-  HIRA_KANA         = %w( あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も や ゆ よ ら り る れ ろ わ を ん )
-  KATA_KANA         = %w( ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ヤ ユ ヨ ラ リ ル レ ロ ワ ヲ ン )
-  HIRA_DAKUON       = %w( が ぎ ぐ げ ご ざ じ ず ぜ ぞ だ ぢ づ で ど ば び ぶ べ ぼ ぱ ぴ ぷ ぺ ぽ )
-  KATA_DAKUON       = %w( ガ ギ グ ゲ ゴ ザ ジ ズ ゼ ゾ ダ ヂ ヅ デ ド バ ビ ブ ベ ボ パ ピ プ ペ ポ )
-  KANA_ALBHEDS      = %w( ワ ミ フ ネ ト ア チ ル テ ヨ ラ キ ヌ ヘ ホ サ ヒ ユ セ ソ ハ シ ス メ オ マ リ ク ケ ロ ヤ イ ツ レ コ タ ヲ モ ナ ニ ウ エ ノ カ ム ン )
-  DAKUON_ALBHEDS    = %w( ダ ジ ヅ デ ゾ バ ギ ブ ゲ ボ ガ ビ グ ベ ゴ ザ ヂ ズ ゼ ド プ ペ パ ポ ピ )
+  HIRA_KANA         = %w(あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も や ゆ よ ら り る れ ろ わ を ん)
+  KATA_KANA         = %w(ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ヤ ユ ヨ ラ リ ル レ ロ ワ ヲ ン)
+  HIRA_DAKUON       = %w(が ぎ ぐ げ ご ざ じ ず ぜ ぞ だ ぢ づ で ど ば び ぶ べ ぼ ぱ ぴ ぷ ぺ ぽ)
+  KATA_DAKUON       = %w(ガ ギ グ ゲ ゴ ザ ジ ズ ゼ ゾ ダ ヂ ヅ デ ド バ ビ ブ ベ ボ パ ピ プ ペ ポ)
+  KANA_ALBHEDS      = %w(ワ ミ フ ネ ト ア チ ル テ ヨ ラ キ ヌ ヘ ホ サ ヒ ユ セ ソ ハ シ ス メ オ マ リ ク ケ ロ ヤ イ ツ レ コ タ ヲ モ ナ ニ ウ エ ノ カ ム ン)
+  DAKUON_ALBHEDS    = %w(ダ ジ ヅ デ ゾ バ ギ ブ ゲ ボ ガ ビ グ ベ ゴ ザ ヂ ズ ゼ ド プ ペ パ ポ ピ)
 
   class ::String
     # Translate into Al Bhed
