@@ -1,3 +1,4 @@
+![](https://github.com/HrsUed/al_bhed/workflows/Ruby/badge.svg)
 # YmPrat
 
 Dnyhcmydun vun Ym Prat myhkiyka eh VEHYM VYHDYCO Q
