@@ -17,89 +17,89 @@ module AlBhed
   KATA_DAKUON       = %w[ガ ギ グ ゲ ゴ ザ ジ ズ ゼ ゾ ダ ヂ ヅ デ ド バ ビ ブ ベ ボ パ ピ プ ペ ポ].freeze
   KANA_ALBHEDS      = %w[ワ ミ フ ネ ト ア チ ル テ ヨ ラ キ ヌ ヘ ホ サ ヒ ユ セ ソ ハ シ ス メ オ マ リ ク ケ ロ ヤ イ ツ レ コ タ ヲ モ ナ ニ ウ エ ノ カ ム ン].freeze
   DAKUON_ALBHEDS    = %w[ダ ジ ヅ デ ゾ バ ギ ブ ゲ ボ ガ ビ グ ベ ゴ ザ ヂ ズ ゼ ド プ ペ パ ポ ピ].freeze
+end
 
-  # a built-in String class
-  class ::String
-    # Translate into Al Bhed
-    #
-    # Example:
-    #   >> "Hi!".to_albhed
-    #   => "Re!"
-    #
-    # Arguments:
-    #   nothing
-    def to_albhed
-      chars.inject("") do |results, c|
-        if latin?(c)
-          results << from_english_to_albhed(c)
-        else
-          results << from_japanese_to_albhed(c)
-        end
-      end
-    end
-
-    # Translate Al Bhed into English
-    #
-    # Example:
-    #   >> "Re!".from_albhed
-    #   => "Hi!"
-    #
-    # Arguments:
-    #   hira: (Boolean)
-    def from_albhed(hira: false)
-      chars.inject("") do |results, c|
-        if latin?(c)
-          results << from_albhed_to_english(c)
-        else
-          results << from_albhed_to_japanese(c, hira: hira)
-        end
-      end
-    end
-
-    private
-
-    def latin?(char)
-      ("a".."z").include?(char) || ("A".."Z").include?(char)
-    end
-
-    def from_english_to_albhed(char)
-      if (idx = DOWNCASES.index(char))
-        DOWNCASED_ALBHEDS[idx]
-      elsif (idx = UPCASES.index(char))
-        UPCASED_ALBHEDS[idx]
+# a built-in String class
+class String
+  # Translate into Al Bhed
+  #
+  # Example:
+  #   >> "Hi!".to_albhed
+  #   => "Re!"
+  #
+  # Arguments:
+  #   nothing
+  def to_albhed
+    chars.inject("") do |results, c|
+      if latin?(c)
+        results << from_english_to_albhed(c)
       else
-        char
+        results << from_japanese_to_albhed(c)
       end
     end
+  end
 
-    def from_albhed_to_english(char)
-      if (idx = DOWNCASED_ALBHEDS.index(char))
-        DOWNCASES[idx]
-      elsif (idx = UPCASED_ALBHEDS.index(char))
-        UPCASES[idx]
+  # Translate Al Bhed into English
+  #
+  # Example:
+  #   >> "Re!".from_albhed
+  #   => "Hi!"
+  #
+  # Arguments:
+  #   hira: (Boolean)
+  def from_albhed(hira: false)
+    chars.inject("") do |results, c|
+      if latin?(c)
+        results << from_albhed_to_english(c)
       else
-        char
+        results << from_albhed_to_japanese(c, hira: hira)
       end
     end
+  end
 
-    def from_japanese_to_albhed(char)
-      if (idx = HIRA_KANA.index(char) || KATA_KANA.index(char))
-        KANA_ALBHEDS[idx]
-      elsif (idx = HIRA_DAKUON.index(char) || KATA_DAKUON.index(char))
-        DAKUON_ALBHEDS[idx]
-      else
-        char
-      end
+  private
+
+  def latin?(char)
+    ("a".."z").include?(char) || ("A".."Z").include?(char)
+  end
+
+  def from_english_to_albhed(char)
+    if (idx = AlBhed::DOWNCASES.index(char))
+      AlBhed::DOWNCASED_ALBHEDS[idx]
+    elsif (idx = AlBhed::UPCASES.index(char))
+      AlBhed::UPCASED_ALBHEDS[idx]
+    else
+      char
     end
+  end
 
-    def from_albhed_to_japanese(char, hira: false)
-      if (idx = KANA_ALBHEDS.index(char))
-        hira ? HIRA_KANA[idx] : KATA_KANA[idx]
-      elsif (idx = DAKUON_ALBHEDS.index(char))
-        hira ? HIRA_DAKUON[idx] : KATA_DAKUON[idx]
-      else
-        char
-      end
+  def from_albhed_to_english(char)
+    if (idx = AlBhed::DOWNCASED_ALBHEDS.index(char))
+      AlBhed::DOWNCASES[idx]
+    elsif (idx = AlBhed::UPCASED_ALBHEDS.index(char))
+      AlBhed::UPCASES[idx]
+    else
+      char
+    end
+  end
+
+  def from_japanese_to_albhed(char)
+    if (idx = AlBhed::HIRA_KANA.index(char) || AlBhed::KATA_KANA.index(char))
+      AlBhed::KANA_ALBHEDS[idx]
+    elsif (idx = AlBhed::HIRA_DAKUON.index(char) || AlBhed::KATA_DAKUON.index(char))
+      AlBhed::DAKUON_ALBHEDS[idx]
+    else
+      char
+    end
+  end
+
+  def from_albhed_to_japanese(char, hira: false)
+    if (idx = AlBhed::KANA_ALBHEDS.index(char))
+      hira ? AlBhed::HIRA_KANA[idx] : AlBhed::KATA_KANA[idx]
+    elsif (idx = AlBhed::DAKUON_ALBHEDS.index(char))
+      hira ? AlBhed::HIRA_DAKUON[idx] : AlBhed::KATA_DAKUON[idx]
+    else
+      char
     end
   end
 end
