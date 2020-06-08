@@ -31,11 +31,7 @@ class String
   #   nothing
   def to_albhed
     chars.inject("") do |results, c|
-      if latin?(c)
-        results << from_english_to_albhed(c)
-      else
-        results << from_japanese_to_albhed(c)
-      end
+      results << (latin?(c) ? from_english_to_albhed(c) : from_japanese_to_albhed(c))
     end
   end
 
@@ -49,11 +45,7 @@ class String
   #   hira: (Boolean)
   def from_albhed(hira: false)
     chars.inject("") do |results, c|
-      if latin?(c)
-        results << from_albhed_to_english(c)
-      else
-        results << from_albhed_to_japanese(c, hira: hira)
-      end
+      results << (latin?(c) ? from_albhed_to_english(c) : from_albhed_to_japanese(c, hira: hira))
     end
   end
 
