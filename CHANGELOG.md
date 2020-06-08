@@ -1,3 +1,7 @@
+# v0.1.3
+- add Rubocop and correct code
+- add GitHub Actions as CI
+
 # v0.1.2
 - add `String#from_albhed` method
 - enabled to translate Japanese
