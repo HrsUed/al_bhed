@@ -45,9 +45,10 @@ class String
   # Arguments:
   #   hira: (Boolean)
   def from_albhed(hira: false)
-    chars.inject("") do |results, c|
-      results << (latin?(c) ? from_albhed_to_english(c) : from_albhed_to_japanese(c, hira: hira))
-    end
+    tr(AlBhed::UPCASED_ALBHEDS.join, AlBhed::UPCASES.join)
+      .tr(AlBhed::DOWNCASED_ALBHEDS.join, AlBhed::DOWNCASES.join)
+      .tr(AlBhed::KANA_ALBHEDS.join, (hira ? AlBhed::HIRA_KANA : AlBhed::KATA_KANA).join)
+      .tr(AlBhed::DAKUON_ALBHEDS.join, (hira ? AlBhed::HIRA_DAKUON : AlBhed::KATA_DAKUON).join)
   end
 
   private
