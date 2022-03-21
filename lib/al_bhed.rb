@@ -30,9 +30,10 @@ class String
   # Arguments:
   #   nothing
   def to_albhed
-    chars.inject("") do |results, c|
-      results << (latin?(c) ? from_english_to_albhed(c) : from_japanese_to_albhed(c))
-    end
+    tr(AlBhed::UPCASES.join, AlBhed::UPCASED_ALBHEDS.join)
+      .tr(AlBhed::DOWNCASES.join, AlBhed::DOWNCASED_ALBHEDS.join)
+      .tr((AlBhed::HIRA_KANA + AlBhed::KATA_KANA).join, AlBhed::KANA_ALBHEDS.join * 2)
+      .tr((AlBhed::HIRA_DAKUON + AlBhed::KATA_DAKUON).join, AlBhed::DAKUON_ALBHEDS.join * 2)
   end
 
   # Translate Al Bhed into English
