@@ -30,9 +30,10 @@ class String
   # Arguments:
   #   nothing
   def to_albhed
-    chars.inject("") do |results, c|
-      results << (latin?(c) ? from_english_to_albhed(c) : from_japanese_to_albhed(c))
-    end
+    tr(AlBhed::UPCASES.join, AlBhed::UPCASED_ALBHEDS.join)
+      .tr(AlBhed::DOWNCASES.join, AlBhed::DOWNCASED_ALBHEDS.join)
+      .tr((AlBhed::HIRA_KANA + AlBhed::KATA_KANA).join, AlBhed::KANA_ALBHEDS.join * 2)
+      .tr((AlBhed::HIRA_DAKUON + AlBhed::KATA_DAKUON).join, AlBhed::DAKUON_ALBHEDS.join * 2)
   end
 
   # Translate Al Bhed into English
@@ -44,54 +45,9 @@ class String
   # Arguments:
   #   hira: (Boolean)
   def from_albhed(hira: false)
-    chars.inject("") do |results, c|
-      results << (latin?(c) ? from_albhed_to_english(c) : from_albhed_to_japanese(c, hira: hira))
-    end
-  end
-
-  private
-
-  def latin?(char)
-    ("a".."z").include?(char) || ("A".."Z").include?(char)
-  end
-
-  def from_english_to_albhed(char)
-    if (idx = AlBhed::DOWNCASES.index(char))
-      AlBhed::DOWNCASED_ALBHEDS[idx]
-    elsif (idx = AlBhed::UPCASES.index(char))
-      AlBhed::UPCASED_ALBHEDS[idx]
-    else
-      char
-    end
-  end
-
-  def from_albhed_to_english(char)
-    if (idx = AlBhed::DOWNCASED_ALBHEDS.index(char))
-      AlBhed::DOWNCASES[idx]
-    elsif (idx = AlBhed::UPCASED_ALBHEDS.index(char))
-      AlBhed::UPCASES[idx]
-    else
-      char
-    end
-  end
-
-  def from_japanese_to_albhed(char)
-    if (idx = AlBhed::HIRA_KANA.index(char) || AlBhed::KATA_KANA.index(char))
-      AlBhed::KANA_ALBHEDS[idx]
-    elsif (idx = AlBhed::HIRA_DAKUON.index(char) || AlBhed::KATA_DAKUON.index(char))
-      AlBhed::DAKUON_ALBHEDS[idx]
-    else
-      char
-    end
-  end
-
-  def from_albhed_to_japanese(char, hira: false)
-    if (idx = AlBhed::KANA_ALBHEDS.index(char))
-      hira ? AlBhed::HIRA_KANA[idx] : AlBhed::KATA_KANA[idx]
-    elsif (idx = AlBhed::DAKUON_ALBHEDS.index(char))
-      hira ? AlBhed::HIRA_DAKUON[idx] : AlBhed::KATA_DAKUON[idx]
-    else
-      char
-    end
+    tr(AlBhed::UPCASED_ALBHEDS.join, AlBhed::UPCASES.join)
+      .tr(AlBhed::DOWNCASED_ALBHEDS.join, AlBhed::DOWNCASES.join)
+      .tr(AlBhed::KANA_ALBHEDS.join, (hira ? AlBhed::HIRA_KANA : AlBhed::KATA_KANA).join)
+      .tr(AlBhed::DAKUON_ALBHEDS.join, (hira ? AlBhed::HIRA_DAKUON : AlBhed::KATA_DAKUON).join)
   end
 end
