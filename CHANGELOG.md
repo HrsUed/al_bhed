@@ -1,3 +1,7 @@
+# v0.2.0
+- improve performances
+- move dependencies from Gemfile to gemspec file
+
 # v0.1.3
 - add Rubocop and correct code
 - add GitHub Actions as CI
